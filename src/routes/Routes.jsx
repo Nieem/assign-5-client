@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import RegisterPage from "../pages/Register";
 import HomeLayout from "../layout/HomeLayout";
 import HomePage from "../pages/HomePage";
+import LoginPage from "../pages/Login";
+import DashboardLayout from "../layout/Dashboard";
 // import HomeLayout from "../layout/HomeLayout";
 // import HomePage from "../pages/HomePage";
 // import PublicPage from "../pages/PublicPage";
@@ -37,28 +39,28 @@ const router = createBrowserRouter([
     //       </PrivateRoute>
     //     ),
     //   },
-    //   {
-    //     path: "/login",
-    //     element: <LoginPage />,
-    //   },
+       {
+         path: "/login",
+         element: <LoginPage />,
+       },
       {
         path: "/register",
         element: <RegisterPage/>,
       },
     ],
   },
-//   {
-//     path: "/dashboard",
-//     element: <DashboardLayout />,
-//     children: [
-//       {
-//         path: "",
-//         element: <Profile />,
-//       },
-//       {
-//         path: "allUsers",
-//         element: <AllUsers />,
-//       },
+  {
+    path: "/dashboard",
+     element: <DashboardLayout />,
+     children: [
+       {
+         path: "",
+         element: <Profile />,
+       },
+       {
+         path: "allUsers",
+         element: <AllUsers />,
+       },
 //       {
 //         path: "profile",
 //         element: <Profile />,
@@ -75,8 +77,8 @@ const router = createBrowserRouter([
 //         path: "createMessage",
 //         element: <CreateMessage />,
 //       },
-//     ],
-//   },
+     ],
+   },
 ]);
 
 export default router;

@@ -29,7 +29,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-white font-semibold">
+    <div className="hero min-h-screen bg-slate-500 font-semibold">
       <div className="card w-full max-w-xl  ">
         <form className="card-body" onSubmit={handleEmailRegister}>
           <h1 className="text-4xl font-extrabold text-center mb-4">
