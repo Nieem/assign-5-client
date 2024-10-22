@@ -4,6 +4,8 @@ import HomeLayout from "../layout/HomeLayout";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/Login";
 import DashboardLayout from "../layout/Dashboard";
+import Profile from "../pages/dashboardPages/Profile";
+import AllUsers from "../pages/dashboardPages/Allusers";
 // import HomeLayout from "../layout/HomeLayout";
 // import HomePage from "../pages/HomePage";
 // import PublicPage from "../pages/PublicPage";
@@ -59,12 +61,12 @@ const router = createBrowserRouter([
        },
        {
          path: "allUsers",
-         element: <AllUsers />,
+         element: <AllUsers/>,
        },
-//       {
-//         path: "profile",
-//         element: <Profile />,
-//       },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
 //       {
 //         path: "messages",
 //         element: <Messages />,

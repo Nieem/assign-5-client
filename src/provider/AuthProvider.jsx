@@ -75,32 +75,32 @@ const AuthProvider = ({ children }) => {
   };
 
   // Monitor auth state and fetch user data from backend
-//   useEffect(() => {
-//     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-//       if (currentUser) {
-//         try {
-//           const res = await fetch(
-//             `https://the-master-full-stack-project-server.vercel.app/user/${currentUser.uid}`
-//           );
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        try {
+          const res = await fetch(
+            `http://localhost:5000/users/${currentUser.uid}`
+          );
 
-//           if (!res.ok) {
-//             throw new Error("Failed to fetch user data.");
-//           }
+          if (!res.ok) {
+            throw new Error("Failed to fetch user data.");
+          }
 
-//           const data = await res.json();
-//           setUser(data);
-//         } catch (error) {
-//           console.error("Error fetching user data:", error.message);
-//         }
-//       } else {
-//         setUser(null);
-//       }
-//     });
+          const data = await res.json();
+          setUser(data);
+        } catch (error) {
+          console.error("Error fetching user data:", error.message);
+        }
+      } else {
+        setUser(null);
+      }
+    });
 
-//     return () => {
-//       unsubscribe();
-//     };
-//   }, [auth]);
+    return () => {
+      unsubscribe();
+    };
+  }, [auth]);
 
   return (
     <AuthContext.Provider
