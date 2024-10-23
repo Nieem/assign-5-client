@@ -6,6 +6,9 @@ import LoginPage from "../pages/Login";
 import DashboardLayout from "../layout/Dashboard";
 import Profile from "../pages/dashboardPages/Profile";
 import AllUsers from "../pages/dashboardPages/Allusers";
+import Product from "../pages/dashboardPages/Products";
+import Products from "../pages/dashboardPages/Products";
+import Addproducts from "../pages/dashboardPages/Addproducts";
 // import HomeLayout from "../layout/HomeLayout";
 // import HomePage from "../pages/HomePage";
 // import PublicPage from "../pages/PublicPage";
@@ -66,6 +69,14 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "products",
+        element: <Products />,
+      },
+      {
+        path: "addproduct",
+        element: <Addproducts />,
       },
 //       {
 //         path: "messages",
