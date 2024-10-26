@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
 
       // Send user data to backend
       const response = await fetch(
-        "http://localhost:5000/users",
+        "https://assign-5-server.onrender.com/users",
         {
           method: "POST",
           headers: {
@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         try {
           const res = await fetch(
-            `http://localhost:5000/users/${currentUser.uid}`
+            `https://assign-5-server.onrender.com/users/${currentUser.uid}`
           );
 
           if (!res.ok) {

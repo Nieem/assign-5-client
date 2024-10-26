@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaEdit, FaUserShield } from "react-icons/fa";
 import { ImBlocked } from "react-icons/im";
+import {toast,Toaster } from "react-hot-toast";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
@@ -8,6 +9,7 @@ const AllUsers = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isBlockModalOpen, setIsBlockModalOpen] = useState(false);
   const [isAdminToggleModalOpen, setIsAdminToggleModalOpen] = useState(false);
+  const imageHostKey = import.meta.env.VITE_IMAGE_BB_API_KEY;
 
   const [formData, setFormData] = useState({
     displayName: "",
@@ -20,7 +22,7 @@ const AllUsers = () => {
   const fetchUsers = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/users"
+        "https://assign-5-server.onrender.com/users"
       );
       const data = await response.json();
       setUsers(data);
@@ -44,7 +46,7 @@ const AllUsers = () => {
       console.log({ updatedUser });
 
       await fetch(
-        `http://localhost:5000/users/${selectedUser._id}`,
+        `https://assign-5-server.onrender.com/users/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -65,9 +67,9 @@ const AllUsers = () => {
     try {
       console.log({ selectedUser });
       const updatedUser = { ...selectedUser, isAdmin: !selectedUser?.isAdmin };
-
+      console.log("toggle",{ updatedUser });
       await fetch(
-        `http://localhost:5000/users/${selectedUser._id}`,
+        `https://assign-5-server.onrender.com/users/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -107,16 +109,60 @@ const AllUsers = () => {
         address: formData.address,
       };
 
-      await fetch(
-        `http://localhost:5000/users/${selectedUser._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedUser),
-        }
-      );
+
+      const formdata=new FormData();
+      formdata.append('image', formData.photoUrl);
+
+      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formdata
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+                     console.log(imgData.data.url);
+
+                    const profileUpdate = {
+                        displayName: formData.displayName,
+                        phone: formData.phone,
+                        photoUrl: imgData.data.url,
+                        address: formData.address,
+                    }
+                     console.log(profileUpdate);
+
+                    // save product information to the database
+                    fetch(`https://assign-5-server.onrender.com/users/${selectedUser._id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify(profileUpdate)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result);
+                           // toast.success(`user  updated successfully`);
+                            fetchUsers();
+                           // navigate('/dashboard/category')
+                        })
+                }
+            })
+
+
+
+      // await fetch(
+      //   `https://assign-5-server.onrender.com/users/${selectedUser._id}`,
+      //   {
+      //     method: "PUT",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(updatedUser),
+      //   }
+      // );
+
+
       fetchUsers(); // Reload users after update
       setIsEditModalOpen(false);
     } catch (error) {
@@ -238,11 +284,11 @@ const AllUsers = () => {
             <div className="mb-4">
               <label className="block text-sm font-medium">Photo URL:</label>
               <input
-                type="text"
+                type="file"
                 className="w-full p-2 border rounded"
-                value={formData.photoUrl}
+                //value={formData.photoUrl}
                 onChange={(e) =>
-                  setFormData({ ...formData, photoUrl: e.target.value })
+                  setFormData({ ...formData, photoUrl: e.target.files[0] })
                 }
               />
             </div>
@@ -269,6 +315,7 @@ const AllUsers = () => {
             >
               Cancel
             </button>
+            <Toaster/>
           </div>
         </div>
       )}

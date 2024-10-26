@@ -1,9 +1,15 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import { FiEdit } from "react-icons/fi"; // Importing react-icon
+import {Toaster,toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     displayName: "",
@@ -12,6 +18,9 @@ const Profile = () => {
     address: "",
   });
 
+  const imageHostKey = import.meta.env.VITE_IMAGE_BB_API_KEY;
+
+  const navigate=useNavigate();
   // Update user info
   const handleUpdate = async () => {
     try {
@@ -23,32 +32,80 @@ const Profile = () => {
         address: formData.address,
       };
 
+      console.log(updatedUser)
       // Make API call to update user information
-      const response = await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${user._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedUser),
-        }
-      );
 
-      if (!response.ok) {
-        throw new Error("Failed to update user information");
-      }
+
+      const formdata=new FormData();
+      formdata.append('image', formData.photoUrl);
+
+      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+        fetch(url, {
+            method: 'POST',
+            body: formdata
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+                     console.log(imgData.data.url);
+
+                    const profileUpdate = {
+                          ...user,
+                        displayName: formData.displayName,
+                        phone: formData.phone,
+                        photoUrl: imgData.data.url,
+                        address: formData.address,
+                    }
+                     console.log(profileUpdate);
+
+                    // save product information to the database
+                    fetch(`https://assign-5-server.onrender.com/users/${user._id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify(profileUpdate)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result);
+                            toast.success(`Profile  updated successfully`);
+                           // navigate('/dashboard/category')
+                        })
+                }
+            })
+      // const response = await fetch(
+      //   `https://assign-5-server.onrender.com/users/${user._id}`,
+      //   {
+      //     method: "PUT",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(updatedUser),
+      //   }
+      // ) .then(res => res.json())
+      // .then(result => {
+      //     console.log(result);
+      //     toast.success(`Profile Updated successfully`);
+          
+      //     navigate('/dashboard/')
+      // })
+
+      // if (!response.ok) {
+      //   throw new Error("Failed to update user information");
+      // }
 
       // Close the modal upon successful update
       setIsEditModalOpen(false);
     } catch (error) {
       console.error("Error updating user:", error);
-      alert("There was an error updating the user. Please try again.");
+      //alert("There was an error updating the user. Please try again.");
     }
   };
 
   // Open the edit modal with the user's current details
   const handleOpenEditModal = () => {
+    setSelectedUser(user);
     setFormData({
       displayName: user.displayName || "",
       phone: user.phone || "",
@@ -100,6 +157,7 @@ const Profile = () => {
             <strong>Unique ID:</strong> {user?.uid}
           </li>
         </ul>
+        <Toaster/>
       </div>
 
       {/* Edit Button with React Icon */}
@@ -142,13 +200,13 @@ const Profile = () => {
             <div className="mb-4">
               <label className="block text-sm font-medium">Photo URL:</label>
               <input
-                type="text"
+                type="file"
                 className="w-full p-2 border rounded"
-                value={formData.photoUrl}
+                //value={formData.photoUrl}
                 onChange={(e) =>
-                  setFormData({ ...formData, photoUrl: e.target.value })
+                  setFormData({ ...formData, photoUrl: e.target.files[0] })
                 }
-              />
+            required  />
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium">Address:</label>
@@ -160,7 +218,9 @@ const Profile = () => {
                   setFormData({ ...formData, address: e.target.value })
                 }
               />
+              
             </div>
+           
             <button
               onClick={handleUpdate}
               className="bg-blue-500 text-white p-2 rounded mr-2"
@@ -173,6 +233,7 @@ const Profile = () => {
             >
               Cancel
             </button>
+           <Toaster/>
           </div>
         </div>
       )}

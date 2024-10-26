@@ -9,6 +9,12 @@ import AllUsers from "../pages/dashboardPages/Allusers";
 import Product from "../pages/dashboardPages/Products";
 import Products from "../pages/dashboardPages/Products";
 import Addproducts from "../pages/dashboardPages/Addproducts";
+import Category from "../pages/dashboardPages/Category";
+import Addcategory from "../pages/dashboardPages/Addcategory";
+import AllProduct from "../pages/allProducts";
+import { ROUTES } from "../router";
+import BookDetailspage from "../pages/productdetailspage";
+import AllCategoryProduct from "../pages/allCategoryProduct";
 // import HomeLayout from "../layout/HomeLayout";
 // import HomePage from "../pages/HomePage";
 // import PublicPage from "../pages/PublicPage";
@@ -52,6 +58,30 @@ const router = createBrowserRouter([
         path: "/register",
         element: <RegisterPage/>,
       },
+      {
+        path: "/allbooks",
+        element: <AllProduct/>,
+      },
+
+      {
+        path:`${ROUTES.SINGLE_PRODUCTS.STATIC}`,
+        element: <BookDetailspage/>
+        ,
+        loader: ({params}) =>
+            // fetch(`http://localhost:5000/courseDetails`),
+         fetch(`https://assign-5-server.onrender.com/products/${params.bookId}`),
+
+   } ,
+   {
+    path:"/AllProductbyCategory/:category",
+    element: <AllCategoryProduct/>
+    ,
+    loader: ({params}) =>
+        // fetch(`http://localhost:5000/courseDetails`),
+    //  fetch(`https://assign-5-server.onrender.com/products/${params.category}`),
+     fetch(`http://localhost:5000/productsBycategory/${params.category}`),
+
+} , 
     ],
   },
   {
@@ -78,10 +108,15 @@ const router = createBrowserRouter([
         path: "addproduct",
         element: <Addproducts />,
       },
-//       {
-//         path: "messages",
-//         element: <Messages />,
-//       },
+      {
+        path: "category",
+        element: <Category />,
+      },
+
+      {
+        path: "addcategory",
+        element: <Addcategory />,
+      },
 //       {
 //         path: "messages/:id",
 //         element: <MessageDetails />,

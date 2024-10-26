@@ -73,6 +73,30 @@ const DashboardSidebarContent = () => {
                   <FaUsers className="inline mr-2" />
                   Products
                 </NavLink>
+
+                <NavLink
+                  to="/dashboard/category"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-blue-500"
+                  }
+                >
+                  <FaUsers className="inline mr-2" />
+                  Category
+                </NavLink>
+                <NavLink
+                  to="/dashboard/addcategory"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-blue-600"
+                      : "text-gray-600 hover:text-blue-500"
+                  }
+                >
+                  <FaUsers className="inline mr-2" />
+                  Add Category
+                </NavLink>
+                
                 <NavLink
                   to="/dashboard/addproduct"
                   className={({ isActive }) =>
