@@ -2,6 +2,7 @@ import {React,useContext} from 'react';
 import logo from "../../assets/navlogo.jpg";
 import { Link,useNavigate,NavLink } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
+import { MdDashboard, MdSpaceDashboard } from "react-icons/md";
 
 
 const Navbar = () => {
@@ -36,14 +37,15 @@ const Navbar = () => {
     <ul className="menu menu-horizontal px-1">
      <li><NavLink  to="/"> Home</NavLink></li>
         <li><NavLink  to="/allbooks"> All Books</NavLink></li>
-        <li><NavLink  to="/blog"> Blog</NavLink></li>
-         <li><NavLink  to="/faq"> FAQ</NavLink></li>
+        {/* <li><NavLink  to="/blog"> Blog</NavLink></li>
+         <li><NavLink  to="/faq"> FAQ</NavLink></li> */}
     </ul>
   </div>
 
  {/* humbege menu  */}
  <div className='navbar-end hidden lg:flex md:flex gap-5'>
- {user && <span className="text-white mr-3">{user.displayName}</span>}
+ {user && 
+ <span className="text-white mr-3">{user.displayName}</span>}
         <div
           tabIndex={0}
           role="button"
@@ -55,12 +57,15 @@ const Navbar = () => {
         </div>
 
         {user ? (
-          <button
-            onClick={handleSignOut}
-            className="btn btn-sm btn-outline btn-success text-md rounded-none"
-          >
-            Logout
-          </button>
+          <Link to="/dashboard" title="Dashboard">
+          <MdSpaceDashboard className="w-6 h-6" />
+        </Link>
+          // <button
+          //   onClick={handleSignOut}
+          //   className="btn btn-sm btn-outline btn-success text-md rounded-none"
+          // >
+          //   Logout
+          // </button>
         ) : (
           <Link to="/login">
             <button className="btn btn-sm btn-info text-md rounded-none">
@@ -92,8 +97,8 @@ tabIndex="0"
 className="menu menu-sm dropdown-content z-30 bg-slate-800 rounded-box -translate-x-20  mt-3 w-32 p-2 shadow hover:bg-slate-400">
 <li><NavLink  to="/"> Home</NavLink></li>
 <li><NavLink  to="/courses"> courses</NavLink></li>
-        <li><NavLink  to="/blog"> Blog</NavLink></li>
-         <li><NavLink  to="/faq"> FAQ</NavLink></li>
+        {/* <li><NavLink  to="/blog"> Blog</NavLink></li> */}
+         {/* <li><NavLink  to="/faq"> FAQ</NavLink></li> */}
          {user ? (
           <button
             onClick={handleSignOut}

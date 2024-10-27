@@ -7,6 +7,9 @@ import {
   FaEnvelope,
   FaSignOutAlt,
   FaPenAlt,
+  FaCartPlus,
+  FaSquareFull,
+  FaPlusSquare
 } from "react-icons/fa";
 
 const DashboardSidebarContent = () => {
@@ -70,7 +73,7 @@ const DashboardSidebarContent = () => {
                       : "text-gray-600 hover:text-blue-500"
                   }
                 >
-                  <FaUsers className="inline mr-2" />
+                  <FaSquareFull className="inline mr-2" />
                   Products
                 </NavLink>
 
@@ -82,7 +85,7 @@ const DashboardSidebarContent = () => {
                       : "text-gray-600 hover:text-blue-500"
                   }
                 >
-                  <FaUsers className="inline mr-2" />
+                  <FaSquareFull className="inline mr-2" />
                   Category
                 </NavLink>
                 <NavLink
@@ -93,7 +96,7 @@ const DashboardSidebarContent = () => {
                       : "text-gray-600 hover:text-blue-500"
                   }
                 >
-                  <FaUsers className="inline mr-2" />
+                  <FaPlusSquare className="inline mr-2" />
                   Add Category
                 </NavLink>
                 
@@ -105,7 +108,7 @@ const DashboardSidebarContent = () => {
                       : "text-gray-600 hover:text-blue-500"
                   }
                 >
-                  <FaUsers className="inline mr-2" />
+                  <FaPlusSquare className="inline mr-2" />
                  Add Products
                 </NavLink>
 
@@ -117,7 +120,7 @@ const DashboardSidebarContent = () => {
                       : "text-gray-600 hover:text-blue-500"
                   }
                 >
-                  <FaUsers className="inline mr-2" />
+                  <FaCartPlus className="inline mr-2" />
                  Checkout Products
                 </NavLink>
 
