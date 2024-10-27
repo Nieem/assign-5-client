@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Toaster,toast } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 const notify = () => toast.success('Here is your toast.');
 const Addproducts = () => {
     const { user } = useContext(AuthContext);
@@ -86,7 +87,9 @@ const Addproducts = () => {
 
     }
     return (
-       
+        <><Helmet>
+        <title> BD BOOK ZONE | Add Products</title>
+      </Helmet>
         <div>
             
             <div className='w-10/12 p-7'>
@@ -174,6 +177,7 @@ const Addproducts = () => {
                 
             </div >
         </div >
+        </>
     );
 };
 

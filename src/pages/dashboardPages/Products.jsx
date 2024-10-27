@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { FaEdit, FaUserShield } from "react-icons/fa";
 import { ImBlocked } from "react-icons/im";
 import { Toaster,toast } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 
 const Products = () => {
@@ -202,7 +203,9 @@ const handleBlock = async () => {
   };
   
     return (
-      
+      <><Helmet>
+      <title> BD BOOK ZONE | All Books</title>
+    </Helmet>
         <div className="container mx-auto p-4">
            <h2 className="text-2xl font-bold mb-4">Products List</h2>
              <table className="min-w-full bg-white border">
@@ -378,6 +381,7 @@ const handleBlock = async () => {
 
 
         </div>
+        </>
     );
 };
 

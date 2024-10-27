@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { Helmet } from "react-helmet-async";
 
 const RegisterPage = () => {
   const { registerWithEmail } = useContext(AuthContext);
@@ -29,6 +30,9 @@ const RegisterPage = () => {
   };
 
   return (
+    <><Helmet>
+      <title> BD BOOK ZONE | Register</title>
+    </Helmet>
     <div className="hero min-h-screen bg-slate-500 font-semibold">
       <div className="card w-full max-w-xl  ">
         <form className="card-body" onSubmit={handleEmailRegister}>
@@ -150,6 +154,7 @@ const RegisterPage = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

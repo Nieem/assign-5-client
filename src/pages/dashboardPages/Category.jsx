@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { FaEdit, FaUserShield } from "react-icons/fa";
 import { ImBlocked } from "react-icons/im";
 import { Toaster,toast } from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Category = () => {
   const [Category, setCategory] = useState([]);
@@ -150,6 +151,9 @@ const handleBlock = async () => {
   };
   
     return (
+        <><Helmet>
+      <title> BD BOOK ZONE | All Category</title>
+    </Helmet>
         <div className="container mx-auto p-4">
            <h2 className="text-2xl font-bold mb-4 text-center">Category List</h2>
            <p className='text-right text-amber-900 font-bold'>add category <button
@@ -279,6 +283,7 @@ const handleBlock = async () => {
 
 
         </div>
+        </>
     );
 };
 

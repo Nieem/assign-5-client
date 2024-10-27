@@ -3,6 +3,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { FiEdit } from "react-icons/fi"; // Importing react-icon
 import {Toaster,toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -116,6 +117,9 @@ const Profile = () => {
   };
 
   return (
+    <><Helmet>
+      <title> BD BOOK ZONE | Profile</title>
+    </Helmet>
     <div className="p-6 bg-white rounded-lg shadow-lg relative">
       <div className="flex flex-col items-center">
         <img
@@ -238,6 +242,7 @@ const Profile = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { Helmet } from "react-helmet-async";
 
 const LoginPage = () => {
   const { loginWithEmail } = useContext(AuthContext);
@@ -25,6 +26,9 @@ const LoginPage = () => {
   };
 
   return (
+    <><Helmet>
+      <title> BD BOOK ZONE | Login</title>
+    </Helmet>
     <div className="hero min-h-screen bg-white pt-10 font-semibold">
       <div className="card w-full max-w-xl ">
         <form className="card-body" onSubmit={handleEmailLogin}>
@@ -89,6 +93,7 @@ const LoginPage = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 

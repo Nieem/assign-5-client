@@ -5,6 +5,7 @@ import { useState,useEffect } from 'react';
 import SingleProduct from '../components/shared/singleProduct.jsx';
 import { useLoaderData } from 'react-router-dom';
 import SingleProductAll from '../components/shared/singleProductAll.jsx';
+import { Helmet } from 'react-helmet-async';
 
 const  AllCategoryProduct = () => {
     const [category, setcategory] = useState([]);
@@ -40,6 +41,9 @@ const  AllCategoryProduct = () => {
 
 
     return (
+        <><Helmet>
+      <title> BD BOOK ZONE | All Produt By Category</title>
+    </Helmet>
         <div className='container my-12 relative p-5'>
         <div className=' justify-center grid grid-cols-1 gap-2  lg:grid-cols-3 md:grid-cols-2'>
            { productBycategory.map((product) => ( 
@@ -50,6 +54,7 @@ const  AllCategoryProduct = () => {
                 }
         </div>
         </div>
+        </>
     );
 };
 export default AllCategoryProduct;

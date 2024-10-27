@@ -3,6 +3,7 @@ import React from 'react';
 import { AuthContext } from '../../provider/AuthProvider';
 import {useContext} from 'react';
 import { FaEdit } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const CheckoutPage = () => {
     const [buyProducts, setbuyProducts] = useState([]);
@@ -66,7 +67,9 @@ const CheckoutPage = () => {
     //   }
 
     return (
-
+<><Helmet>
+      <title> BD BOOK ZONE | Checkout Page</title>
+    </Helmet>
 <div className="container mx-auto p-4">   
     <div className='flex flex-col items-center justify-center mt-3'>
    <button className="btn btn-success btn-block" onClick={() => viewBuyProduct()}> Click to Checkout</button>
@@ -119,6 +122,7 @@ const CheckoutPage = () => {
    </div>)}
    
    </div>
+   </>
     );
 };
 
