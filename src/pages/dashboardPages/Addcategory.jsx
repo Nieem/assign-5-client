@@ -82,7 +82,7 @@ const Addcategory = () => {
     }
     return (
         <div>
-            <div className='w-full p-7 bg-slate-400'>
+            <div className='w-full p-7 bg-slate-200'>
                 <h2 className="text-2xl text-[#562614] md:text-center text-left font-bold">Add a Category</h2>
                 <form onSubmit={handleSubmit(handleAddCategory)} className=" justify-center border shadow-lg py-2 px-3 mt-3 flex flex-col md:flex-row">
                     <div>
@@ -109,7 +109,7 @@ const Addcategory = () => {
                                 {errors.image && <p className='text-red-500 text-xs'>{errors.image.message}</p>}
                             </div>
                         </div>
-                        <input className='btn btn-info md:w-80 w-64 rounded-none mt-1' value="Add Product" type="submit" />
+                        <input className='btn btn-info md:w-80 w-64 rounded-none mt-1 ms-6' value="Add Product" type="submit" />
                         <Toaster/>
                     </div>
 

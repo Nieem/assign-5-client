@@ -92,7 +92,7 @@ const Addproducts = () => {
       </Helmet>
         <div>
             
-            <div className='w-10/12 p-7 bg-slate-400'>
+            <div className='w-10/12 p-7 bg-slate-200'>
                 <h2 className="text-2xl text-[#562614] md:text-center text-left font-bold">Add a Product</h2>
                 <form onSubmit={handleSubmit(handleAddProduct)} className="border shadow-lg py-2 px-6 mt-3 flex flex-col md:flex-row">
                 
@@ -108,9 +108,23 @@ const Addproducts = () => {
                             </div>
                             {errors.name && <p className='text-red-500 text-xs'>{errors.name.message}</p>}
                         </div>
+                        <div className="form-control w-full max-w-xs border p-2 border-indigo-400 mb-3">
+                            <div className='flex input-bordered rounded-none'>
+                                <label className="label"> <span className="label-text ">Resell Price:</span></label>
 
-                        <div className='flex justify-center w-full max-w-xs items-center border p-2 border-indigo-400 mb-3'>
-                            <div className="form-control w-11/12 max-w-xs mr-4 mt-1">
+                                <input type="text" {...register("resalePrice", {
+                                    required: "Product Name is Required"
+                                })}
+                                    className="input input-bordered w-full max-w-xs rounded-none bg-white" />
+                            </div>
+                            {errors.resalePrice && <p className='text-red-500 text-xs'>{errors.resalePrice.message}</p>}
+                        </div>
+
+                        
+
+
+                        {/* <div className='form-control w-full max-w-xs border p-2 border-indigo-400 mb-3'>
+                            <div className="flex input-bordered rounded-none">
                                 <label className="label"> <span className="label-text ">Resell Price</span></label>
 
                                 <input type="text" {...register("resalePrice", {
@@ -119,7 +133,7 @@ const Addproducts = () => {
                                 {errors.resalePrice && <p className='text-red-600 text-xs'>{errors.resalePrice.message}</p>}
                             </div>
 
-                        </div>
+                        </div> */}
 
                         <div className="form-control w-full max-w-xs border p-2 border-indigo-400 mb-3">
                             <div className='flex justify-center items-center  max-w-xs'>

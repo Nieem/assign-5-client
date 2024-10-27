@@ -157,7 +157,7 @@ const handleBlock = async () => {
         <div className="container mx-auto p-4">
            <h2 className="text-2xl font-bold mb-4 text-center">Category List</h2>
            
-             <table className="min-w-full bg-slate-400 border">
+             <table className="min-w-full bg-slate-200 border">
         <thead>
           <tr className="bg-gray-200 text-gray-600 text-left">
             <th className="py-2 px-4 border">#</th>

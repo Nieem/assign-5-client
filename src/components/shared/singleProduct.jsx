@@ -22,7 +22,7 @@ const SingleProduct = (props) => {
     <p> Price : {course.price}</p>
     <p>{course.level}</p> */}
     <div className="card-actions">
-      <button className="btn btn-accent mt-2">Course Details</button>
+      <button className="btn btn-accent mt-2">View All</button>
     </div>
   </div>
 </div>

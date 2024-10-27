@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-//import   jsondata from "../assets/book-data.json";
-///import { toast,ToastContainer } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../provider/AuthProvider';
 import { useContext } from 'react';
- import { useLoaderData } from 'react-router-dom';
- import { Helmet } from 'react-helmet-async';
+import { useLoaderData } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+
+
+
 
 const BookDetailspage = () => {
   const [bookdetails,setbookdetail]=useState([]);
   const productDetails = useLoaderData();
-
   const { user } = useContext(AuthContext);
   console.log("user",user);
+
   const [selectedUser, setSelectedUser] = useState(null);
   const [isproductBuyModalOpen, setisproductBuyModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -130,10 +130,12 @@ const handleOpenEditModal = () => {
   });
 
   setisproductBuyModalOpen(true);
+
 };
 
     return (
-      <><Helmet>
+      <>
+      <Helmet>
       <title> BD BOOK ZONE | Books Details</title>
     </Helmet>
         <div className='my-3'>
@@ -146,9 +148,21 @@ const handleOpenEditModal = () => {
       <h1 className="text-5xl font-bold">{productDetails.productName}</h1>
       <p className="py-6 ml-2">
         <span className='font-bold'>Details:</span><span className='italic'> {productDetails.description}</span> &nbsp;
-        <span className='font-bold'>Lession:</span> <span>{productDetails.category}</span>&nbsp;
-        <span className='font-bold'>price:</span> <span> {productDetails.resalePrice}</span>&nbsp;
+        <span className='font-bold'>Category:</span> <span>{productDetails.category}</span>&nbsp;
+        <span className='font-bold'>Price:  </span> <span> {productDetails.resalePrice}</span>&nbsp;
       </p>
+
+      <div className="rating">
+  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+  <input
+    type="radio"
+    name="rating-2"
+    className="mask mask-star-2 bg-orange-400"
+    defaultChecked />
+  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+  <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+</div>
       {/* <button className="btn btn-primary" onClick={notify}>Wise to Read</button>*/}
       <button className="btn btn-accent ms-2" onClick={handleOpenEditModal}>Add to Cart</button> 
       {/* <ToastContainer/> */}

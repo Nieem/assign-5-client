@@ -20,7 +20,7 @@ const SingleProductAll = (props) => {
     <p> Category : {product.category}</p>
     <p>Status:{product.status}</p> 
     <div className="card-actions">
-      <button className="btn btn-accent mt-2">Course Details</button>
+      <button className="btn btn-accent mt-2">View Details</button>
     </div>
   </div>
 </div>

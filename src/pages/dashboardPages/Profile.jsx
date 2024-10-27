@@ -120,7 +120,7 @@ const Profile = () => {
     <><Helmet>
       <title> BD BOOK ZONE | Profile</title>
     </Helmet>
-    <div className="p-6 bg-white rounded-lg shadow-lg relative">
+    <div className="p-6 bg-slate-200 rounded-lg shadow-lg relative">
       <div className="flex flex-col items-center">
         <img
           src={user?.photoUrl}
