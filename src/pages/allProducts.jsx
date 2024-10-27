@@ -4,6 +4,7 @@ import { useState,useEffect } from 'react';
  //import jsondata from '../assets/book-data.json' 
 import SingleProductAll from '../components/shared/singleProductAll';
 //import { useLoaderData } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const  AllProduct = () => {
     const [products, setproducts] = useState([]);
@@ -36,6 +37,10 @@ const  AllProduct = () => {
 
 
     return (
+        <>
+        <Helmet>
+        <title> BD BOOK ZONE | All Books</title>
+      </Helmet>
         <div className='container my-12 relative p-7'>
         <div className=' justify-center grid grid-cols-1 gap-2  lg:grid-cols-3 md:grid-cols-2'>
            { products.map((product) => ( 
@@ -46,6 +51,7 @@ const  AllProduct = () => {
                 }
         </div>
         </div>
+        </>
     );
 };
 export default AllProduct;

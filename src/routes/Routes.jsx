@@ -15,6 +15,7 @@ import AllProduct from "../pages/allProducts";
 import { ROUTES } from "../router";
 import BookDetailspage from "../pages/productdetailspage";
 import AllCategoryProduct from "../pages/allCategoryProduct";
+import CheckoutPage from "../pages/dashboardPages/checkout";
 // import HomeLayout from "../layout/HomeLayout";
 // import HomePage from "../pages/HomePage";
 // import PublicPage from "../pages/PublicPage";
@@ -116,6 +117,11 @@ const router = createBrowserRouter([
       {
         path: "addcategory",
         element: <Addcategory />,
+      },
+
+      {
+        path: "checkout",
+        element: <CheckoutPage />,
       },
 //       {
 //         path: "messages/:id",

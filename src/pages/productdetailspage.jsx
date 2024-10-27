@@ -6,14 +6,16 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import { useContext } from 'react';
  import { useLoaderData } from 'react-router-dom';
+ import { Helmet } from 'react-helmet-async';
 
 const BookDetailspage = () => {
   const [bookdetails,setbookdetail]=useState([]);
   const productDetails = useLoaderData();
 
   const { user } = useContext(AuthContext);
+  console.log("user",user);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isproductBuyModalOpen, setisproductBuyModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     displayName: "",
     phone: "",
@@ -22,7 +24,7 @@ const BookDetailspage = () => {
   });
  // setbookdetail(productDetails);
   //const  products=productDetails.json();
-  console.log("data",productDetails.description);
+  console.log("data",productDetails);
    
     // const bookID= useParams();
     // console.log(bookID);
@@ -49,58 +51,45 @@ const BookDetailspage = () => {
 // getBookById();
 // },[])
 
-const handleUpdate = async () => {
+ // buy product
+ const handleUpdate = async () => {
+
+  
   try {
     const updatedUser = {
-      ...user,
-      displayName: formData.displayName,
-      phone: formData.phone,
-      photoUrl: formData.photoUrl,
+      //...selectedUser,
+     // displayName: formData.displayName,
+      productId:formData.productId,
+      productPrice:formData.productPrice,
+      productName:formData.productName,
+      uid:user.uid,
       address: formData.address,
+      phone: formData.phone,
+      productImage:productDetails.image,
+      buyTime:new Date()
+      //photoUrl: formData.photoUrl,
+      
+      
     };
 
-    console.log(updatedUser)
-    // Make API call to update user information
+    console.log(updatedUser);
 
-
-    const formdata=new FormData();
-    formdata.append('image', formData.photoUrl);
-
-    const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
-      fetch(url, {
-          method: 'POST',
-          body: formdata
-      })
-          .then(res => res.json())
-          .then(imgData => {
-              if (imgData.success) {
-                   console.log(imgData.data.url);
-
-                  const profileUpdate = {
-                        ...user,
-                      displayName: formData.displayName,
-                      phone: formData.phone,
-                      photoUrl: imgData.data.url,
-                      address: formData.address,
-                  }
-                   console.log(profileUpdate);
-
-                  // save product information to the database
-                  fetch(`https://assign-5-server.onrender.com/users/${user._id}`, {
-                      method: 'PUT',
-                      headers: {
-                          'content-type': 'application/json',
-                      },
-                      body: JSON.stringify(profileUpdate)
-                  })
-                      .then(res => res.json())
-                      .then(result => {
-                          console.log(result);
-                          toast.success(`Profile  updated successfully`);
-                         // navigate('/dashboard/category')
-                      })
-              }
-          })
+    await fetch(
+      `http://localhost:5000/userBuyproducts`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+      }
+    );
+   // fetchUsers(); // Reload users after update
+   setisproductBuyModalOpen(false);
+  } catch (error) {
+    console.error("Error updating user:", error);
+  }
+};
     // const response = await fetch(
     //   `https://assign-5-server.onrender.com/users/${user._id}`,
     //   {
@@ -123,32 +112,31 @@ const handleUpdate = async () => {
     // }
 
     // Close the modal upon successful update
-    setIsEditModalOpen(false);
-  } catch (error) {
-    console.error("Error updating user:", error);
-    //alert("There was an error updating the user. Please try again.");
-  }
-};
 
 
 const handleOpenEditModal = () => {
   setSelectedUser(user);
+  console.log(user);
   setFormData({
     displayName: user.displayName || "",
     phone: user.phone || "",
     email:user.email || "",
-    //photoUrl: user.photoUrl || "",
+   // image: productDetails.photoUrl || "",
     address: user.address || "",
+    productId:productDetails._id,
+    productName:productDetails.productName,
+    productPrice:productDetails.resalePrice,
+
   });
-  setIsEditModalOpen(true);
+
+  setisproductBuyModalOpen(true);
 };
 
     return (
+      <><Helmet>
+      <title> BD BOOK ZONE | Books Details</title>
+    </Helmet>
         <div className='my-3'>
-          
-
-
-
 <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row px-7">
     <img
@@ -169,11 +157,11 @@ const handleOpenEditModal = () => {
 </div>
 
  {/* Edit Modal */}
- {isEditModalOpen && (
+ {isproductBuyModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg w-1/3">
-            <h3 className="text-xl mb-4">Edit User</h3>
-            <div className="mb-4">
+            <h3 className="text-xl mb-3 text-center font-bold">Buy Book</h3>
+            <div className="mb-2">
               <label className="block text-sm font-medium">Name:</label>
               <input
                 type="text"
@@ -184,7 +172,7 @@ const handleOpenEditModal = () => {
                 }
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="block text-sm font-medium">Email:</label>
               <input
                 type="email"
@@ -195,7 +183,7 @@ const handleOpenEditModal = () => {
                 }
             disabled  />
             </div>
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="block text-sm font-medium">Phone:</label>
               <input
                 type="text"
@@ -206,7 +194,7 @@ const handleOpenEditModal = () => {
                 }
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="block text-sm font-medium">Address:</label>
               <input
                 type="text"
@@ -216,7 +204,42 @@ const handleOpenEditModal = () => {
                   setFormData({ ...formData, address: e.target.value })
                 }
               />
+            </div>
+            <div className="mb-2">
+              <label className="block text-sm font-medium">Product Name:</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={formData.productName}
+                onChange={(e) =>
+                  setFormData({ ...formData, productName: e.target.value })
+                }
+             disabled />
               
+            </div>
+
+            <div className="mb-2">
+              <label className="block text-sm font-medium">Price:</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={formData.productPrice}
+                onChange={(e) =>
+                  setFormData({ ...formData, productPrice: e.target.value })
+                }
+             disabled />
+            </div>
+
+            <div className="mb-4" hidden>
+              <label className="block text-sm font-medium">Product Id:</label>
+              <input
+                type="text"
+                className="w-full p-2 border rounded"
+                value={formData.productId}
+                onChange={(e) =>
+                  setFormData({ ...formData, productId: e.target.value })
+                }
+              />
             </div>
            
             <button
@@ -226,8 +249,8 @@ const handleOpenEditModal = () => {
               Add to Checkout
             </button>
             <button
-              onClick={() => setIsEditModalOpen(false)}
-              className="bg-gray-500 text-white p-2 rounded"
+              onClick={() => setisproductBuyModalOpen(false)}
+              className="bg-red-500 text-white p-2 rounded"
             >
               Cancel
             </button>
@@ -239,6 +262,7 @@ const handleOpenEditModal = () => {
 
 
   </div>
+  </>
     ); 
   }
 export default BookDetailspage;
