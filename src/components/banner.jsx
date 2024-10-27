@@ -32,11 +32,10 @@ const Banner = () => {
   <div className="hero-content text-neutral-content text-center">
     <div className="max-w-md">
       <h1 className="mb-5 text-5xl font-bold">Welcome!</h1>
-      <p className="mb-5">
-      ICT is generally used to represent a more comprehensive list of all components related to computer and digital technologies.
-       IT is more about managing the technologies related to information, and its various technical aspects, including software, hardware, and networking..
+      <p className="mb-5 text-3xl font-bold italic">
+       BD BOOK ZONE
       </p>
-      <button className="btn btn-primary">Get Started</button>
+      <button className="btn btn-info">Get Started</button>
     </div>
   </div>
 </div>

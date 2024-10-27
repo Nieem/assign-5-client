@@ -69,7 +69,7 @@ const router = createBrowserRouter([
         element: <BookDetailspage/>
         ,
         loader: ({params}) =>
-            // fetch(`http://localhost:5000/courseDetails`),
+            // fetch(`https://assign-5-server.onrender.com/courseDetails`),
          fetch(`https://assign-5-server.onrender.com/products/${params.bookId}`),
 
    } ,
@@ -78,9 +78,9 @@ const router = createBrowserRouter([
     element: <AllCategoryProduct/>
     ,
     loader: ({params}) =>
-        // fetch(`http://localhost:5000/courseDetails`),
+        // fetch(`https://assign-5-server.onrender.com/courseDetails`),
     //  fetch(`https://assign-5-server.onrender.com/products/${params.category}`),
-     fetch(`http://localhost:5000/productsBycategory/${params.category}`),
+     fetch(`https://assign-5-server.onrender.com/productsBycategory/${params.category}`),
 
 } , 
     ],

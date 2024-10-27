@@ -75,7 +75,7 @@ const BookDetailspage = () => {
     console.log(updatedUser);
 
     await fetch(
-      `http://localhost:5000/userBuyproducts`,
+      `https://assign-5-server.onrender.com/userBuyproducts`,
       {
         method: "POST",
         headers: {

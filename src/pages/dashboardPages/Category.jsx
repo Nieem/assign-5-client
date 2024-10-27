@@ -156,14 +156,8 @@ const handleBlock = async () => {
     </Helmet>
         <div className="container mx-auto p-4">
            <h2 className="text-2xl font-bold mb-4 text-center">Category List</h2>
-           <p className='text-right text-amber-900 font-bold'>add category <button
-                  onClick={() => openAddModal()}
-                  className="mr-2 p-2 rounded-full bg-yellow-500 text-white"
-                  title="Edit User"
-                > 
-                  <FaEdit />
-                </button> </p>
-             <table className="min-w-full bg-white border">
+           
+             <table className="min-w-full bg-slate-400 border">
         <thead>
           <tr className="bg-gray-200 text-gray-600 text-left">
             <th className="py-2 px-4 border">#</th>

@@ -16,7 +16,7 @@ const CheckoutPage = () => {
     const viewBuyProduct = async () => {
         try {     
           const response = await fetch(
-            `http://localhost:5000/userBuyproducts/${user.uid}`
+            `https://assign-5-server.onrender.com/userBuyproducts/${user.uid}`
           );
           const data = await response.json();
           setbuyProducts(data);

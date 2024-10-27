@@ -82,11 +82,11 @@ const Addcategory = () => {
     }
     return (
         <div>
-            <div className='w-10/12 p-7'>
-                <h2 className="text-2xl text-[#FF652E] md:text-center text-left font-bold">Add a Category</h2>
-                <form onSubmit={handleSubmit(handleAddCategory)} className="border shadow-lg py-2 px-6 mt-3 flex flex-col md:flex-row">
+            <div className='w-full p-7 bg-slate-400'>
+                <h2 className="text-2xl text-[#562614] md:text-center text-left font-bold">Add a Category</h2>
+                <form onSubmit={handleSubmit(handleAddCategory)} className=" justify-center border shadow-lg py-2 px-3 mt-3 flex flex-col md:flex-row">
                     <div>
-                        <div className="form-control w-full max-w-xs border p-2 border-indigo-400 mb-3">
+                        <div className="form-control w-full max-w-sm border p-2 border-indigo-400 mb-3">
                             <div className='flex input-bordered rounded-none'>
                                 <label className="label"> <span className="label-text ">Category Name:</span></label>
 
@@ -100,7 +100,7 @@ const Addcategory = () => {
 
                        
 
-                        <div className="form-control w-full max-w-xs border p-2 border-indigo-400 mb-3">
+                        <div className="form-control w-full max-w-sm border p-2 border-indigo-400 mb-3">
                             <div className='flex justify-center items-center  max-w-xs'>
                                 <label className="label"> <span className="label-text">Upload Photo:</span></label>
                                 <input type="file" {...register("image", {
